@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JHost — Epstein Public Record Archive</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- AGE GATE -->
+  <div id="age-gate">
+    <div class="gate-box">
+      <div class="gate-logo"><span>J</span>Host</div>
+      <h2 class="gate-heading">Are you 18 or older?</h2>
+      <p class="gate-sub">This archive contains court documents and investigative records related to serious federal crimes. Adults only.</p>
+      <div class="gate-btns" id="gate-btns">
+        <button class="btn-primary" onclick="enterSite()">Yes, I'm 18 or older</button>
+        <button class="btn-ghost" onclick="declineSite()">No, I'm under 18</button>
+      </div>
+      <div id="gate-declined"><p>Access restricted. This site is for adults only.</p></div>
+    </div>
+  </div>
+
+  <!-- SITE -->
+  <div id="site-content" style="display:none;">
+
+    <header>
+      <div class="header-inner">
+        <a class="logo" href="#"><span>J</span>Host</a>
+        <div id="star-widget" onclick="toggleStar()">
+          <span id="star-icon">☆</span>
+          <span id="star-label">Star</span>
+          <span id="star-count"></span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <section class="hero">
+        <div class="eyebrow">Public Record Archive</div>
+        <h1>Jeffrey Epstein</h1>
+        <div class="hero-dates">January 20, 1953 – August 10, 2019</div>
+        <div class="hero-body">
+          <p>Jeffrey Edward Epstein was an American financier and convicted sex offender who operated a decades-long trafficking network targeting underage girls. He was arrested in July 2019 on federal charges of sex trafficking and conspiracy.</p>
+          <p>Epstein was found dead in his cell at the Metropolitan Correctional Center on August 10, 2019 — ruled a suicide by the NYC medical examiner, though widely disputed. Beginning in 2024, a federal judge ordered thousands of pages of civil litigation documents unsealed, making them publicly available for the first time.</p>
+          <div class="tags">
+            <span class="tag tag-red">Deceased</span>
+            <span class="tag">SDNY 19-CR-490</span>
+            <span class="tag">Documents Unsealed 2024</span>
+            <span class="tag">Sex Trafficking · Conspiracy</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-label">Resources</div>
+      <h2 class="section-title">Public Archives</h2>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-badge">Email Archive · Third-Party</div>
+          <div class="card-title">JMail — Email Archive</div>
+          <div class="card-url">jmail.world</div>
+          <p class="card-desc">A Gmail-style interface built to host and browse Epstein's recovered email correspondence. Allows researchers and journalists to search and cross-reference his communications.</p>
+          <ul class="card-features">
+            <li>Gmail-style browsing interface</li>
+            <li>Searchable email correspondence</li>
+            <li>Contact and thread organization</li>
+            <li>No login required</li>
+          </ul>
+          <a class="card-btn" href="https://jmail.world/" target="_blank" rel="noopener">Open Archive ↗</a>
+        </div>
+
+        <div class="card">
+          <div class="card-badge">Official Federal · DOJ.gov</div>
+          <div class="card-title">U.S. Dept. of Justice</div>
+          <div class="card-url">justice.gov/epstein</div>
+          <p class="card-desc">The official DOJ page for the Epstein case. Authoritative source for federal indictments, plea agreements, press releases, and statements related to Epstein and co-conspirators.</p>
+          <ul class="card-features">
+            <li>Official DOJ press releases</li>
+            <li>Federal indictment documents</li>
+            <li>Plea agreements and sentencing records</li>
+            <li>Victim resources and support</li>
+          </ul>
+          <a class="card-btn" href="https://www.justice.gov/epstein" target="_blank" rel="noopener">View DOJ Files ↗</a>
+        </div>
+
+      </div>
+
+      <div class="about">
+        <h3>About JHost</h3>
+        <p>JHost is an independent public-interest repository aggregating openly available resources related to the Epstein federal case. All linked resources are either official U.S. government sources or publicly accessible third-party archives. This site does not host proprietary documents and is not affiliated with any government agency.</p>
+      </div>
+
+    </main>
+
+    <footer>
+      <span>JHost · Independent Public Record Archive</span>
+      <div class="footer-links">
+        <a href="https://jmail.world/" target="_blank">JMail</a>
+        <a href="https://www.justice.gov/epstein" target="_blank">DOJ Files</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/star.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
