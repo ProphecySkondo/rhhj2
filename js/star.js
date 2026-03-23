@@ -79,13 +79,13 @@ async function initStar(ip) {
 }
 
 async function toggleStar() {
-  if (!_ip) return;
+  if (!window._ip) return;
   if (_starred) {
-    await removeStar(_ip);
+    await removeStar(window._ip);
     _starred = false;
     _count   = Math.max(0, _count - 1);
   } else {
-    await addStar(_ip);
+    await addStar(window._ip);
     _starred = true;
     _count++;
   }
