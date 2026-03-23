@@ -1,38 +1,22 @@
 // star.js
-// Handles the star counter using Supabase as the backend.
-// Table required:
-//   create table stars (
-//     ip text primary key,
-//     created_at timestamp default now()
-//   );
+// Star counter — synced with Supabase.
+// Shares _ip with visitor.js (set in main.js after IP fetch).
 
 const STAR_TABLE = 'stars';
-
-async function getVisitorIP() {
-  try {
-    const res = await fetch('https://api.ipify.org?format=json');
-    const data = await res.json();
-    return data.ip;
-  } catch {
-    return null;
-  }
-}
 
 async function fetchStarCount() {
   const res = await fetch(
     `${CONFIG.SUPABASE_URL}/rest/v1/${STAR_TABLE}?select=ip`,
     {
       headers: {
-        apikey: CONFIG.SUPABASE_ANON_KEY,
+        apikey:        CONFIG.SUPABASE_ANON_KEY,
         Authorization: `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
-        'Content-Type': 'application/json',
-        Prefer: 'count=exact',
+        Prefer:        'count=exact',
       },
     }
   );
-  const count = res.headers.get('content-range');
-  // content-range format: 0-N/TOTAL
-  if (count) return parseInt(count.split('/')[1], 10);
+  const range = res.headers.get('content-range');
+  if (range) return parseInt(range.split('/')[1], 10);
   const data = await res.json();
   return Array.isArray(data) ? data.length : 0;
 }
@@ -43,7 +27,7 @@ async function checkIfStarred(ip) {
     `${CONFIG.SUPABASE_URL}/rest/v1/${STAR_TABLE}?ip=eq.${encodeURIComponent(ip)}&select=ip`,
     {
       headers: {
-        apikey: CONFIG.SUPABASE_ANON_KEY,
+        apikey:        CONFIG.SUPABASE_ANON_KEY,
         Authorization: `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
       },
     }
@@ -56,10 +40,10 @@ async function addStar(ip) {
   await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/${STAR_TABLE}`, {
     method: 'POST',
     headers: {
-      apikey: CONFIG.SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
+      apikey:         CONFIG.SUPABASE_ANON_KEY,
+      Authorization:  `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
       'Content-Type': 'application/json',
-      Prefer: 'return=minimal',
+      Prefer:         'return=minimal',
     },
     body: JSON.stringify({ ip }),
   });
@@ -71,7 +55,7 @@ async function removeStar(ip) {
     {
       method: 'DELETE',
       headers: {
-        apikey: CONFIG.SUPABASE_ANON_KEY,
+        apikey:        CONFIG.SUPABASE_ANON_KEY,
         Authorization: `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
       },
     }
@@ -85,14 +69,12 @@ function setStarUI(starred, count) {
   starred ? widget.classList.add('starred') : widget.classList.remove('starred');
 }
 
-let _ip = null;
 let _starred = false;
-let _count = 0;
+let _count   = 0;
 
-async function initStar() {
-  _ip      = await getVisitorIP();
+async function initStar(ip) {
   _count   = await fetchStarCount();
-  _starred = await checkIfStarred(_ip);
+  _starred = await checkIfStarred(ip);
   setStarUI(_starred, _count);
 }
 
